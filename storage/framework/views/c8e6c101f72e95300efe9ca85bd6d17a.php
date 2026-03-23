@@ -15,22 +15,22 @@
                         <?php $__currentLoopData = $favorites; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $favorite): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php $product = $favorite->product; ?>
                             <?php if($product): ?>
-                                <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
-                                     data-href="<?php echo e(route('products.show', $product)); ?>"
-                                     role="link"
-                                     tabindex="0"
-                                     onclick="window.location.href=this.dataset.href"
-                                     onkeydown="if(event.key==='Enter' || event.key===' '){ event.preventDefault(); window.location.href=this.dataset.href; }">
+                                  <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
+                                      data-href="<?php echo e(route('products.show', $product)); ?>"
+                                      role="link"
+                                      tabindex="0"
+                                      onclick="if(event.target.closest('form')) return; window.location.href=this.dataset.href"
+                                      onkeydown="if((event.key==='Enter' || event.key===' ') && !event.target.closest('form')){ event.preventDefault(); window.location.href=this.dataset.href; }">
                                     <div class="aspect-square overflow-hidden bg-gray-100">
                                         <img src="<?php echo e($product->images->first()?->image_path ? asset('storage/' . $product->images->first()->image_path) : 'https://via.placeholder.com/300x300?text=No+Image'); ?>" alt="<?php echo e($product->name); ?>" class="w-full h-full object-cover">
                                     </div>
                                     <div class="p-4">
                                         <h3 class="text-lg font-semibold text-gray-900 mb-1"><?php echo e($product->name); ?></h3>
                                         <p class="text-sm text-gray-600 mb-3 line-clamp-2"><?php echo e($product->description); ?></p>
-                                        <form method="POST" action="<?php echo e(route('favorites.destroy', $product)); ?>" onsubmit="return confirm('Remove from favorites?');">
+                                        <form method="POST" action="<?php echo e(route('favorites.destroy', $product)); ?>">
                                             <?php echo csrf_field(); ?>
                                             <?php echo method_field('DELETE'); ?>
-                                            <button type="submit" class="inline-flex items-center px-3 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 text-xs font-medium">Remove</button>
+                                            <button type="submit" class="inline-flex items-center px-3 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 text-xs font-medium" data-confirm="Remove from favorites?" data-confirm-label="Remove">Remove</button>
                                         </form>
                                     </div>
                                 </div>

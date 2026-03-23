@@ -104,10 +104,16 @@
                         </a>
 
                             <!-- Favorites Icon -->
-                            <a href="{{ route('favorites.index') }}" class="inline-flex items-center p-2 text-gray-500 hover:text-pink-500 transition" title="Favorites">
+                            @php
+                                $favoritesCount = auth()->check() ? auth()->user()->favorites()->count() : 0;
+                            @endphp
+                            <a href="{{ route('favorites.index') }}" class="inline-flex items-center p-2 text-gray-500 hover:text-pink-500 transition relative" title="Favorites">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 21.364l-7.682-7.682a4.5 4.5 0 010-6.364z" />
                                 </svg>
+                                @if ($favoritesCount > 0)
+                                    <span class="absolute top-0 right-0 flex items-center justify-center w-5 h-5 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-pink-500" style="border-radius: 50%;">{{ $favoritesCount }}</span>
+                                @endif
                             </a>
 
                         <!-- Orders Icon -->
