@@ -147,12 +147,14 @@
                     </form>
                 @endif
             </div>
-            <a href="{{ route('orders.receipt', $order) }}" class="inline-flex items-center gap-1 px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-full hover:bg-blue-800" style="border-radius: 0.375rem !important;">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" />
-                </svg>
-                Download Receipt PDF
-            </a>
+            @if($order->status === 'completed')
+                <a href="{{ route('orders.receipt', $order) }}" class="inline-flex items-center gap-1 px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-full hover:bg-blue-800" style="border-radius: 0.375rem !important;">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" />
+                    </svg>
+                    Download Receipt PDF
+                </a>
+            @endif
         </div>
     </div>
 </div>
