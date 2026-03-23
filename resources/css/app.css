@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+	.max-w-7xl {
+		max-width: 95rem;
+	}
+}
+
+@layer components {
+	.instant-image-remove,
+	button[onclick*="toggleImageDelete"],
+	button[onclick*="variant-item"] {
+		border-radius: 50% !important;
+	}
+}
