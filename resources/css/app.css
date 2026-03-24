@@ -1,3 +1,13 @@
+/* Fix unwanted heart icon on profile image */
+a[href*="profile"].items-center::after,
+a[href*="profile"].items-center::before,
+a[href*="profile"].inline-flex::after,
+a[href*="profile"].inline-flex::before,
+.h-10.w-10.object-cover::after,
+.h-10.w-10.object-cover::before {
+	content: none !important;
+	display: none !important;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
